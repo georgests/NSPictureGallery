@@ -1,0 +1,80 @@
+<scriptedContentFragments>
+	<scriptedContentFragment name="${resource:widget_imagegallerylist}" version="7.0.0.1" description="${resource:widget_description}" instanceIdentifier="2117b4da3bbe4932b2e9904359a73224" theme="" isCacheable="false" varyCacheByUser="false" showHeaderByDefault="true" cssClass="poll-list">
+		<contentScript>
+			<![CDATA[
+      #set($imageGalleryListURL = $core_v2_widget.GetExecutedFileUrl('ImageGalleryList.vm'))
+      
+      <div id="$core_v2_widget.UniqueId('imageGalleryListView')" >
+      </div>
+      
+      <div>
+      <div class="field-list-header"></div>
+      <fieldset class="field-list">
+	      <ul class="field-list">
+          <li class="field-item">
+            Image Gallery Name:<input type="Text" id="$core_v2_widget.UniqueId('imagename')" name="imagename"/>
+          </li>
+		      <li class="field-item">
+			    <span class="field-item-input"><input id="$core_v2_widget.UniqueId('newImageGallery')" type="button" value="New Image Gallery" /></span>
+		      </li>
+	      </ul>
+      </fieldset>
+      <div class="field-list-footer"></div>
+      </div>
+      
+#registerEndOfPageHtml('sts.imggallery.widgets.listImageGallary')
+	<script type="text/javascript" src="$core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetFileUrl('ui.js'))"></script>
+#end
+#registerEndOfPageHtml()
+	<script type="text/javascript">
+		jQuery(function(j){
+			j.sts.imggallery.widgets.listImageGallary.register({
+				wrapperId: '$core_v2_widget.WrapperElementId',
+        ImageTitle: j('#$core_v2_widget.UniqueId('imagename')'),
+        btnNewImageGallery: j('#$core_v2_widget.UniqueId('newImageGallery')'),
+        stsImageGalleryListURL: '$imageGalleryListURL',
+        stsImageGalleryListView: j('#$core_v2_widget.UniqueId('imageGalleryListView')')
+			});
+		});
+	</script>
+#end
+			]]>
+		</contentScript>
+		<headerScript>
+			<![CDATA[
+$core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:widget_imagegallerylist}'))
+			]]>
+		</headerScript>
+		<configuration>
+			<![CDATA[
+<propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:widget_imagegallerylist}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+			]]>
+		</configuration>
+    
+    <languageResources>
+			<language key="en-us">
+				<resource name="widget_imagegallerylist">Naturally Slim - Picture Gallery List</resource>
+				<resource name="widget_description">Lists Image Gallerys within the current group.</resource>
+				<resource name="configuration_options">Options</resource>
+				<resource name="configuration_header">Header</resource>
+				<resource name="ui_imagegallerys">Image Gallerys</resource>
+				<resource name="posted_by">Asked by:</resource>
+				<resource name="no_imagegallerys">This group does not yet have any image gallerys.</resource>
+        <resource name="addimagegallery_confirmation">Do you want to create new Image Gallery? </resource>
+        <resource name="imagegallery_addsuccessful">Your Image Gallery has been created.</resource>
+        <resource name="comment_addcomment">Leave a Comment</resource>
+        <resource name="comment_save">Post</resource>
+        <resource name="comment_ajaxError">There was an error saving your comment.</resource>
+        <resource name="comment_saving">Publishing</resource>
+        <resource name="comment_bodyRequired">Please enter a comment</resource>
+      </language>
+		</languageResources>
+    <!-- 
+    <requiredContext>
+      <context id="40306c023e6d4f1590f291119ff7b579" />
+    </requiredContext>
+    -->
+  </scriptedContentFragment>
+</scriptedContentFragments>

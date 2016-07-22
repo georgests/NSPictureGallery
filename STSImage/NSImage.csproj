@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{8D7AAEA6-F99C-4F32-B7A1-BAD61E35A8FA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>STSImage</RootNamespace>
+    <AssemblyName>NSImage</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Telligent.DynamicConfiguration">
+      <HintPath>..\..\Telligent-Libs\Telligent.DynamicConfiguration.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Api">
+      <HintPath>..\..\Telligent-Libs\Telligent.Evolution.Api.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Components">
+      <HintPath>..\..\Telligent-Libs\Telligent.Evolution.Components.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Controls">
+      <HintPath>..\..\Telligent-Libs\Telligent.Evolution.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Core">
+      <HintPath>..\..\Telligent-Libs\Telligent.Evolution.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.Rest">
+      <HintPath>..\..\Telligent-Libs\Telligent.Evolution.Rest.dll</HintPath>
+    </Reference>
+    <Reference Include="Telligent.Evolution.ScriptedContentFragments">
+      <HintPath>..\..\Telligent-Libs\Telligent.Evolution.ScriptedContentFragments.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="InternalApi\EmbeddedResources.cs" />
+    <Compile Include="InternalApi\Entities\Image.cs" />
+    <Compile Include="InternalApi\Entities\ImageGallery.cs" />
+    <Compile Include="InternalApi\Formatting.cs" />
+    <Compile Include="InternalApi\ImageDataService.cs" />
+    <Compile Include="InternalApi\ImageService.cs" />
+    <Compile Include="Plugins\Content\ImageGalleryContentType.cs" />
+    <Compile Include="Plugins\Content\ImageGallerySearchCategories.cs" />
+    <Compile Include="Plugins\ImageGalleryApplication.cs" />
+    <Compile Include="Plugins\REST\ImageGalleryRestEndpoints.cs" />
+    <Compile Include="Plugins\UI\ImageGalleryFactoryDefaultWidgetProvider.cs" />
+    <Compile Include="Plugins\UI\ImageGalleryGroupNavigation.cs" />
+    <Compile Include="Plugins\UI\ImageGalleryHeaderExtension.cs" />
+    <Compile Include="Plugins\UI\ImageGalleryNewPostLink.cs" />
+    <Compile Include="Plugins\UI\ImageGalleryWidgetContextProvider.cs" />
+    <Compile Include="Plugins\UI\ImageGalleryWidgetExtension.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PublicApi\Entities\Image.cs" />
+    <Compile Include="PublicApi\Entities\ImageGallery.cs" />
+    <Compile Include="PublicApi\ImageGalleryEvents.cs" />
+    <Compile Include="PublicApi\ImageGalleryRenderEventArgs.cs" />
+    <Compile Include="PublicApi\ImageGallerys.cs" />
+    <Compile Include="PublicApi\Images.cs" />
+    <Compile Include="PublicApi\ImagesEvents.cs" />
+    <Compile Include="RestApi\Entities\Group.cs" />
+    <Compile Include="RestApi\Entities\Image.cs" />
+    <Compile Include="RestApi\Entities\ImageGallery.cs" />
+    <Compile Include="RestApi\Entities\User.cs" />
+    <Compile Include="RestApi\RestResponse.cs" />
+    <Compile Include="WidgetApi\ImageGallerys.cs" />
+    <Compile Include="WidgetApi\Images.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Css\poll.css" />
+    <EmbeddedResource Include="Resources\Css\polling-Enterprise.css" />
+    <EmbeddedResource Include="Resources\Css\polling-Fiji.css" />
+    <EmbeddedResource Include="Resources\Pages\imagegallery-Enterprise-Groups-Page.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Pages\imagegallery-Fiji-Groups-Page.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Sql\install.sql" />
+    <EmbeddedResource Include="Resources\Sql\storedprocedures.sql" />
+    <EmbeddedResource Include="Resources\Sql\uninstall.sql" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery-Widget.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Widgets\ImageGalleryFileupload-Widget.xml" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGalleryList-Widget.xml" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\lightbox-blank.gif" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\lightbox-btn-close.gif" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\lightbox-btn-next.gif" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\lightbox-btn-prev.gif" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\lightbox-ico-loading.gif" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\jquery.lightbox-0.5.js" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\ui.js" />
+    <EmbeddedResource Include="Resources\Widgets\STSImageGalleryList\ui.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\STSImageGalleryList\ImageGalleryList.vm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\JavaScript\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\UploadImageData.vm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\ImageGallery.vm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\delete_img_bttn-old.png" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\edit_done_bttn.png" />
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\edit_text_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\loadComments.vm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\camera.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\AddFile.vm" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\popup.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\delete_img_bttn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\Rotate-icon-red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Widgets\ImageGallery\Images\rotate-icon.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

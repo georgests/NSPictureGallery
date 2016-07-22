@@ -1,0 +1,14 @@
+C:\Users\ospluser\Desktop\Arivu\Kiruba\img\STSImage\STSImage\bin\Release\NSImage.dll
+C:\Users\ospluser\Desktop\Arivu\Kiruba\img\STSImage\STSImage\bin\Release\NSImage.pdb
+C:\Users\ospluser\Desktop\Arivu\Kiruba\img\STSImage\STSImage\obj\Release\NSImage.dll
+C:\Users\ospluser\Desktop\Arivu\Kiruba\img\STSImage\STSImage\obj\Release\NSImage.pdb
+C:\Users\ospluser\Desktop\STSImagemine\STSImage\bin\Release\NSImage.dll
+C:\Users\ospluser\Desktop\STSImagemine\STSImage\bin\Release\NSImage.pdb
+C:\Users\ospluser\Desktop\STSImagemine\STSImage\obj\Release\NSImage.dll
+C:\Users\ospluser\Desktop\STSImagemine\STSImage\obj\Release\NSImage.pdb
+F:\Projects\NS Picture Gallery (2)\STS Image Gallery\STSImage\bin\Release\NSImage.dll
+F:\Projects\NS Picture Gallery (2)\STS Image Gallery\STSImage\bin\Release\NSImage.pdb
+F:\Projects\NS Picture Gallery (2)\STS Image Gallery\STSImage\bin\Release\Newtonsoft.Json.dll
+F:\Projects\NS Picture Gallery (2)\STS Image Gallery\STSImage\obj\Release\NSImage.csprojResolveAssemblyReference.cache
+F:\Projects\NS Picture Gallery (2)\STS Image Gallery\STSImage\obj\Release\NSImage.dll
+F:\Projects\NS Picture Gallery (2)\STS Image Gallery\STSImage\obj\Release\NSImage.pdb

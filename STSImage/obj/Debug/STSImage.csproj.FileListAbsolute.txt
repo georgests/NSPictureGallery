@@ -1,0 +1,11 @@
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\STSImage.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\STSImage.pdb
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.DynamicConfiguration.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.Evolution.Api.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.Evolution.Components.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.Evolution.Controls.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.Evolution.Core.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.Evolution.Rest.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\bin\Debug\Telligent.Evolution.ScriptedContentFragments.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\obj\Debug\STSImage.dll
+C:\Users\pmunaga\Desktop\MyClients\STS\Telligent\Projects\STSImage\STSImage\obj\Debug\STSImage.pdb

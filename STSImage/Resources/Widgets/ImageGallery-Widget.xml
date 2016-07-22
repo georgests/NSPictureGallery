@@ -1,0 +1,336 @@
+﻿<scriptedContentFragments>
+  <scriptedContentFragment
+    name="${resource:imageWidgetTitle}"
+    version="7.0.0.1"
+    description="${resource:imageWidgetTitle}"
+    instanceIdentifier="ecea783dd78b476b97c84c85f440aba6"
+    theme=""
+    isCacheable="false"
+    varyCacheByUser="false"
+    showHeaderByDefault="true"
+    cssClass="poll">
+    <contentScript>
+      <![CDATA[
+<style type="text/css">
+/*
+#lightbox-nav-btnPrev
+{
+  background:transparent url("$core_v2_widget.GetFileUrl('lightbox-blank.gif')") no-repeat;
+}
+
+#lightbox-nav-btnPrev:hover
+{
+  background:url("$core_v2_widget.GetFileUrl('lightbox-btn-prev.gif')") left 15% no-repeat;
+}
+
+#lightbox-nav-btnNext
+{
+  background:transparent url("$core_v2_widget.GetFileUrl('lightbox-blank.gif')") no-repeat;
+}
+
+#lightbox-nav-btnNext:hover
+{
+  background:url("$core_v2_widget.GetFileUrl('lightbox-btn-next.gif')") right 15% no-repeat;
+}
+*/
+#lightbox-nav-btnPrev
+{
+  background:url("$core_v2_widget.GetFileUrl('lightbox-btn-prev.gif')") left 15% no-repeat;
+}
+
+#lightbox-nav-btnNext
+{
+  background:url("$core_v2_widget.GetFileUrl('lightbox-btn-next.gif')") right 15% no-repeat;
+}
+
+#lightbox-container-image-box-ff {width:420px !important; height:300px !important;position:absolute;left:-450px; max-width:500px !important;}
+#lightbox-container-image-box-ch {width:420px !important; height:300px !important;position:absolute;left:300px; max-width:500px !important;}
+#lightbox-container-image-box-sa {width:420px !important; height:300px !important;position:absolute;left:200px; max-width:500px !important;}
+#lightbox-container-image-box {width:420px !important; height:300px !important;max-width:500px !important;}
+#lightbox-container-image {width:100% !important; height:420px !important;position:absolute;background:#666; padding:2px; margin-right:5px; height:99%;}
+
+#poup_rightside_wrap {float:right; width:37%; height:100%; margin:10px 1% 0 0; position:relative;}
+.clear { clear:both; padding:0px; margin:0px;}
+#lightbox-container-image-data-box { width:100% !important; position:absolute; bottom:0px; left:0px; padding:5px 0 0; display:none !important;}
+#comments_disp_wrap { width:100%; margin:0 auto; overflow-y:scroll; overflow-x:hidden; height:330px; padding:5px 0 0 0;}
+
+#comments_disp_wrap::-webkit-scrollbar{width:10px; background-color:#cccccc;} 
+#comments_disp_wrap::-webkit-scrollbar-thumb{background-color:#B03C3F; border-radius:5px;}
+#comments_disp_wrap::-webkit-scrollbar-thumb:hover{background-color:#BF4649 ;border:1px solid #333333;}
+#comments_disp_wrap::-webkit-scrollbar-thumb:active{background-color:#A6393D; border:1px solid #333333;} 
+#comments_disp_wrap::-webkit-scrollbar-track{border:1px gray solid; border-radius:10px; -webkit-box-shadow:0 0 6px gray inset;}
+ 
+#comment_box_wrap { width:100%; margin:10px 0; border:1px solid #ccc; position:relative;}
+#comment_box_wrap .user_comment_box { width:90%; border:none; margin:0 1px 0 0; height:30px; min-height:20px; line-height:1.28; display:block; overflow: visible; white-space: nowrap; padding:1%;}
+#comment_box_wrap img {position:absolute; right:2px; bottom:2px;}
+#user_comments_sec { margin:0px; padding:0px;}
+#user_comments_sec li { width:100%; list-style:none; margin:0; background:#ffe8d8; }
+#user_comments_sec li .cmnt_inside_wrap { width:98%; margin:5px; padding:2px;}
+#user_comments_sec li .cmnt_inside_wrap .cmnt_foto_sec { width:20%; float:left; text-align:center;}
+#user_comments_sec li .cmnt_inside_wrap .cmnt_foto_sec img { max-width:95%;}
+#user_comments_sec li .cmnt_inside_wrap .comment_sec { width:78%; float:right; font-size:13px; line-height:1.2; text-align:left;}
+
+#lightbox-container-image .contnr_img_atag {display: inline; height: 99%; line-height: 500px; position: relative; text-align: center;}
+#lightbox-container-image .contnr_img_atag #lightbox-image {max-height: 99%; max-width: 99%; vertical-align: middle;}
+#user_disp_sec_top { width:100%; margin:5px 0;}
+#cmnt_user_prfl_picSec { width:23%; float:left; margin:0 5px 0 0;}
+#cmnt_user_prfl_picSec img { width:95%;}
+#user_prfl_dtls_sec { width:40%; float:left;}
+#user_prfl_dtls_sec .name_title { font-weight:bold; font-size:14px; color:#E97222;}
+#user_prfl_dtls_sec p { font-size:12px; color:#666; line-height:normal; text-align:left;}
+#like_cmnt_top_sec { width:100%; margin:0 0 5px; line-height:normal; text-align:left;}
+#like_cmnt_top_sec label { float:left; margin-right:10px; font-size:12px; color:#E97222;}
+#like_cmnt_top_sec label a {font-size:12px; color:#E97222; text-decoration:none; font-weight:normal;}
+#lightbox-nav { height:50% !important; margin-top:100px !important;}
+#lightbox-nav a { height:100px !important;}
+.pic_options_sec { float:right; width:auto;}
+.pic_options_sec a { float:left; margin-right:5px; line-height:normal; cursor:pointer;}
+#lightbox-secNav { position:absolute; right:0; top:0; margin-right:10px; margin-top:10px;}
+#lightbox-secNav-btnClose { width:17px !important;}
+#lightbox-loading {
+	position: absolute !important;
+	top: 0 !important;
+	left: 0% !important;
+	height: 300px !important;
+	width: 100% !important;
+	text-align: center !important;
+	line-height: 0 !important;
+  margin-top: 50px !important;
+}
+
+#jquery-overlay {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 90;
+	width: 500px;
+	height: 400px;
+}
+
+.content-list .content-item { list-style: none; margin: 0; padding: .25em 0; border-bottom: dotted 1px #ccc; }
+
+ul, menu, dir {
+display: block;
+list-style-type: disc;
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+-webkit-padding-start: 40px;
+}
+
+.sts_photo_large
+{
+  position: absolute;
+  display: block;
+  /*
+  max-width: 300px;
+  max-height: 300px;
+  */
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: 0;
+  border: 0;
+}
+
+  .imgContainer{
+  overflow:hidden;
+  width:300px;
+  height: 300px;
+  }
+  .imgContainer img{
+  width:300px;
+  height:auto; 
+  }
+  
+.dottedLine {
+  border-top: 1px dotted #f00;
+  color: #fff;
+  background-color: #fff;
+  height: 1px;
+  width:100%;
+}
+</style>
+#set($name =$sts_v1_imagegallery.GetWebBrowserName())
+  
+#if (!$core_v2_configuration.EnableUserFileStorage)
+  $core_v2_widget.Hide()
+#end
+
+#set($userId = $core_v2_user.Current.Id)
+#set($parentFolder = $core_v2_userFolder.Current)
+#set($parentFolderPath = "")
+#set($viewParentFolderUrl = $core_v2_urls.UserFiles($userId, $parentFolder.Path))
+#set($contextId = $core_v2_uploadedFile.CreateContextId())
+
+#*#if ($userId != $core_v2_user.Accessing.Id || !$core_v2_user.IsRegistered($userId))
+  $core_v2_widget.Hide()
+#end*#
+
+#set($userId = $core_v2_user.Current.Id)
+#set($friendshipState = 'NotSpecified')
+#set($friendship = false)
+#set($friendship = $core_v2_friendship.Get("%{UserId=$core_v2_user.Accessing.Id,FriendId=$userId}"))
+#if ($friendship)
+    #set($friendshipState = $friendship.FriendshipState)
+#end
+
+#if ($friendshipState != 'Approved' && $userId != $core_v2_user.Accessing.Id)
+$core_v2_widget.Hide()
+#end
+
+
+#if ($parentFolder && $parentFolder.Path && $parentFolder.Path != "")
+	#set($parentFolderPath = $core_v2_utility.Join('\', $parentFolder.Path))
+#end
+
+#set($fileUploadContextId = $core_v2_uploadedFile.CreateContextId())
+#set($fileUploadContextIdURL = $core_v2_uploadedFile.GetUploadUrl($fileUploadContextId))
+#set($uploadImageDataURL = $core_v2_widget.GetExecutedFileUrl('UploadImageData.vm'))
+
+#set($commentsListURL = $core_v2_widget.GetExecutedFileUrl('loadComments.vm'))
+#set($addImageURL = $core_v2_widget.GetExecutedFileUrl('AddFile.vm'))
+
+#set($imageGalleryViewURL = $core_v2_widget.GetExecutedFileUrl('ImageGallery.vm'))
+<form autocomplete="off">
+<ul class="content-list" id="$core_v2_widget.UniqueId('imageGalleryImageList')">
+</ul>
+</form>
+
+#set($userId = $core_v2_user.Current.Id)
+#if ($userId == $core_v2_user.Accessing.Id || !$core_v2_user.IsRegistered($userId))
+<div class="field-list-header"><hr class="dottedLine" /></div>
+<div id="$core_v2_widget.UniqueId('addFileContainer')"> </div>
+#end
+<div class="field-list-footer"></div>
+<div id="$core_v2_widget.UniqueId('popup')" style="display:none; position:fixed !important; bottom: 0 !important; left: 150px !important; top: 150px !important; ">
+      <div id="jquery-lightbox" style="background-color: #00000000;">   
+      
+        #if($name == "Firefox")
+         <div id="lightbox-container-image-box-ff" width="500px" height="0px" left = "300px" style="border-radius:25px;">
+        #elseif($name == "Chrome")
+         <div id="lightbox-container-image-box-ch" width="500px" height="0px" left = "300px" style="border-radius:25px;">
+         #elseif($name =="Safari")
+     <div id="lightbox-container-image-box-sa" width="500px" height="0px" left = "300px" style="border-radius:25px;">
+        #else
+      <div id="lightbox-container-image-box" width="500px" height="0px" left = "300px" style="border-radius:25px;">
+        #end        
+          <div id="lightbox-container-image"  style="border:solid 6px #333; border-radius:25px;">
+               <div id="lightbox-secNav"><img src="$core_v2_widget.GetFileUrl('lightbox-btn-close.gif')" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.closepopup()" /></div>
+            <a class="contnr_img_atag"><img id="lightbox-image"></a>
+            <div style="" id="lightbox-nav">
+              <a id="lightbox-nav-btnPrev" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showPrev()"></a>
+              <a id="lightbox-nav-btnNext" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showNext()"></a>
+            </div>
+            <div id="lightbox-loading" class="imgContainer">
+            <img id=$core_v2_widget.UniqueId('srcImage') ></div>
+            <div id="lightbox-container-image-data-box">
+              <div id="lightbox-container-image-data">
+                <div id="lightbox-image-details"><span id="lightbox-image-details-caption"></span><span id="lightbox-image-details-currentNumber"></span></div>
+                <div class="pic_options_sec"><span id="$core_v2_widget.UniqueId('imageLike')" style="display:none"></span> 
+
+                <br class="clear" /></div>
+                <div class="clear"></div> 
+               </div>
+             </div>
+            </div>
+            <div id="poup_rightside_wrap" style="display:none">
+<!--               <div id="lightbox-secNav"><img src="$core_v2_widget.GetFileUrl('lightbox-btn-close.gif')" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.closepopup()" /></div> -->
+               <div id="user_disp_sec_top">
+                <div id="cmnt_user_prfl_picSec"><img src="$core_v2_user.Accessing.AvatarUrl" /></div>
+                <div id="user_prfl_dtls_sec"><p class="name_title">"$core_v2_user.Accessing.DisplayName"</p></div><br class="clear" /></div>
+                <div id="like_cmnt_top_sec"><label><a href="#">Comment</a></label></div>
+                <div id="comments_disp_wrap">
+                  <div id="user_comments_sec">
+                  </div>
+                 </div>
+                 <div id="comment_box_wrap">
+                  <textarea id="$core_v2_widget.UniqueId('comment_box')" name="comment_box" cols="" rows="" class="user_comment_box" placeholder="Write a Comment..."></textarea>
+                  <img src="$core_v2_widget.GetFileUrl('camera.jpg')" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.addcomment()" />
+                 </div>
+               </div>
+               <div class="clear"></div>
+              </div>
+             </div>
+</div>
+
+#registerEndOfPageHtml('sts.imggallery.widgets.imageWidget.popup')
+	<script type="text/javascript" src="$core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetFileUrl("popup.js"))"></script>
+#end
+
+#registerEndOfPageHtml('sts.imggallery.widgets.imageWidget')
+	<script type="text/javascript" src="$core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetFileUrl("ui.js"))"></script>
+#end
+#registerEndOfPageHtml()
+	<script type="text/javascript">
+		jQuery(function(j){
+			j.sts.imggallery.widgets.imageWidget.register({
+				wrapperId : '$core_v2_widget.WrapperElementId',
+				userId : '$userId',
+				uploadFileButton : j('#$core_v2_widget.UniqueId('uploadfile')'),
+				fileUploadId : '#$core_v2_widget.UniqueId('uploadFileInput')',
+				fileUploadContainerId : j('#$core_v2_widget.UniqueId('uploadFileContainer')'),
+				uploadFileStateId : '#$core_v2_widget.UniqueId('uploadFileState')',
+				viewParentFolderUrl : '$core_v2_encoding.JavascriptEncode($core_v2_page.AbsoluteUrl($viewParentFolderUrl))',
+				parentFolderPath : '$core_v2_encoding.JavascriptEncode($parentFolderPath)',
+				createUrl : '$core_v2_encoding.JavascriptEncode($core_v2_widget.GetExecutedFileUrl('create.vm'))',
+				createFileErrorMessage : '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource("AddUserFile_CreateError"))',
+				uploadFileUrl : '$core_v2_encoding.JavascriptEncode($core_v2_uploadedFile.GetUploadUrl($contextId))',
+				contextId : '$core_v2_encoding.JavascriptEncode($contextId)',
+        imagename : j('#$core_v2_widget.UniqueId('imagename')'),
+        stsUploadFileCtrl : '#$core_v2_widget.UniqueId('stsUploadFile')',
+        stsFileUploadContextURL :'$fileUploadContextIdURL',
+        stsFileUploadContextId : '$fileUploadContextId',
+        stsUploadImageDataURL : '$uploadImageDataURL',
+        stsImageGallery : j('#$core_v2_widget.UniqueId('imageGalleryImageList')'),
+        stsImageGalleryViewURL : '$imageGalleryViewURL',
+        stsPopup : j('#$core_v2_widget.UniqueId('popup')'),
+        stsSrcImage : j('#$core_v2_widget.UniqueId('srcImage')'),
+        stsImageLike : j('#$core_v2_widget.UniqueId('imageLike')'),
+        stsCommentsView: j('#user_comments_sec'),
+        stsCommentsListUrl: '$commentsListURL',
+        stsAddCommentTextArea: j('#$core_v2_widget.UniqueId('comment_box')'),
+        stsAddImageURL: '$addImageURL',
+        stsAddFileContainer: j('#$core_v2_widget.UniqueId('addFileContainer')'),
+        imagePopup : '$core_v2_widget.UniqueId('popup')'
+			});
+		});
+	</script>
+#end
+
+ ]]>
+    </contentScript>
+    <headerScript>
+      <![CDATA[
+ $core_v2_widget.ApplyTokens($core_v2_widget.GetStringValue('fragmentHeader', '${resource:imageWidgetTitle}'))
+
+      ]]>
+    </headerScript>
+    <configuration>
+      <![CDATA[
+ <propertyGroup id="options" resourceName="configuration_options">
+	<property id="fragmentHeader" resourceName="configuration_header" dataType="string" defaultValue="${resource:imageWidgetTitle}" controlType="Telligent.Evolution.Controls.ContentFragmentTokenStringControl, Telligent.Evolution.Controls" />
+</propertyGroup>
+      ]]>
+    </configuration>
+    <additionalCssScript>
+      <![CDATA[
+ 
+      ]]>
+    </additionalCssScript>
+    <languageResources>
+      <language key="en-us">
+        <resource name="imageWidgetTitle">Naturally Slim - Picture Gallery</resource>
+        <resource name="UserFile_NoFiles">No Files Found</resource>
+        <resource name="AddUserFile_CreateError">User File Creation Failed</resource>
+      </language>
+    </languageResources>
+    <!-- 
+    <requiredContext>
+      <context id="40306c023e6d4f1590f291119ff7b579" />
+    </requiredContext>
+    -->
+  </scriptedContentFragment>
+</scriptedContentFragments>

@@ -1,0 +1,11 @@
+﻿#set($uploadFileContextId = $core_v2_page.GetQueryStringValue('fileUploadContextId'))
+#set($fileName = $core_v2_page.GetQueryStringValue('fileName'))
+#set($imageData = $core_v2_uploadedFile.Get($uploadFileContextId, $fileName))
+
+## Upload the Image and get the URL for the file
+#set($imageFileUrl = $sts_v1_imagegallery.UploadImageData($imageData.Name, $imageData.FileData))
+
+## Remember to clear the multiple upload manager
+$core_v2_uploadedFile.Clear($uploadFileContextId)
+
+$imageFileUrl

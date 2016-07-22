@@ -1,0 +1,81 @@
+﻿<style type="text/css">
+.edit_text_bttn { width:30px; height:25px; background:url('$core_v2_widget.GetFileUrl('edit_text_icon.png')') no-repeat center center; cursor:pointer; border:none;}
+.delete_image_bttn { width:30px; height:25px; background:url('$core_v2_widget.GetFileUrl('delete_img_bttn.png')') no-repeat center center; cursor:pointer; border:none;}
+
+.sts_image_name_box {
+    height: 20px;
+    margin-left: 5px;
+    padding:5px 10px;
+    width: 250px;
+	border:1px solid #999;
+	color:#333333;
+	border-radius:3px;
+}
+.clearfix { 
+	clear:both;
+	margin:0;
+	padding:0;
+}
+
+.content-list .content-item { border-bottom:none; padding:0px;}
+.abbreviated-post { padding:10px 15px !important;}
+
+.image_view_sec { text-align:center; height:125px;}
+.image_view_sec img { max-width:95% !important; max-height:95% !important;}
+.buttn_wrap { margin:0 0 5px 0; text-align: center; padding:0px;}
+.image_head_box { width:90%; margin:0px; padding:2px 5px; border:1px solid #999; height:20px; color:#333333; border-radius:3px;}
+.activate { width:90%; margin:0px; padding:2px 5px; border:1px solid #C60; height:20px; color:#fff; background:#0067B1;}
+</style>
+
+#set($au = $core_v2_user.Accessing)
+#set($groupdId = $core_v2_group.Current.Id)
+#set($igId = $sts_v1_imagegallery.FirstImageGalleryId($groupdId))
+#set($ig = $sts_v1_imagegallery.Get($igId))
+#set($images = $ig.Images)
+
+<form autocomplete="off">
+<ul class="content-list" id="picLightbox">
+
+#foreach($image in $images)
+        <!--<div class="content-list-header"></div>-->
+	#afterall
+		</ul>
+		</form>
+		<div class="content-list-footer"></div>
+	#nodata
+		<div class="message norecords">No Files Found</div>
+	#each
+		<li class="content-item">
+			<div class="abbreviated-post-header"></div>
+			<div class="abbreviated-post">    
+				<div class="post-attachment-viewer">
+                <a href="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" class="internal-link view-post">
+				<span></span>$core_v2_ui.GetPreviewHtml($image.FilePath, "%{Width=131,Height=94,id=$image.Id}")
+                </a>
+				</div>
+				<!--
+				<h4 class="post-name">
+					<input type="button" name="btnedit" id = "btnedit" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.editimagetitle('$image.Id')" />
+					<span><input type="text" id = "tb$image.Id" readOnly="true" value="$core_v2_encoding.HtmlEncode($image.Title)" /></span>
+					<input type="button" name="btndelete" id = "btndelete" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.deleteimage('$image.Id')" />
+				</h4>
+				-->
+    			<div class="post-name">
+                    <p class="buttn_wrap">
+    				<input type="button" name="btnedit" id = "btnedit" class="edit_text_bttn" title="Edit Text" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.editimagetitle('$image.Id')" />
+    	        	<input type="button" name="btndelete" id = "btndelete" class="delete_image_bttn" title="Delete Image" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.deleteimage('$image.Id')" />
+                    </p>
+                    <span><input type="text" id = "tb$image.Id" class="image_head_box" readOnly="true" value="$core_v2_encoding.HtmlEncode($image.Title)" /></span>
+    			</div>
+			</div>
+			<div class="abbreviated-post-footer"></div>
+		</li>
+#end
+</ul>
+</form>
+<div class="clearfix"> </div>
+<script>
+$('.edit_text_bttn').on('click',function(){
+    $(this).parents('.post-name').find('.image_head_box').addClass('activate');
+});
+</script>

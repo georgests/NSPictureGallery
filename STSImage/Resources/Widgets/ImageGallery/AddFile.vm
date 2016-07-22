@@ -1,0 +1,33 @@
+﻿<fieldset class="field-list">
+	<ul class="field-list">
+		<li class="field-item" id="$core_v2_widget.UniqueId('uploadFileContainer')">
+			<div class="field-item-input">
+				<input type="file" id="$core_v2_widget.UniqueId('uploadFileInput')" />
+				<input type="hidden" name="hiddenInputName" id="$core_v2_widget.UniqueId('uploadFileState')" value="contextValue:" />
+			</div>
+			<span class="field-item-validation" style="display: none;"></span>
+		</li>
+        <li class="field-item">
+			Image Name:<input type="Text" id=$core_v2_widget.UniqueId("imagename") name="imagename"/>
+        </li>
+		<li class="field-item">
+			<span class="field-item-input"><input id="$core_v2_widget.UniqueId('uploadfile')" type="button" value="Add Picture" /></span>
+		</li>
+	</ul>
+</fieldset>
+#registerEndOfPageHtml()
+	<script type="text/javascript">
+		jQuery(function(j){
+			j.sts.imggallery.widgets.imageWidget.registerAddImage({
+				uploadFileButton : j('#$core_v2_widget.UniqueId('uploadfile')'),
+				fileUploadId : '#$core_v2_widget.UniqueId('uploadFileInput')',
+				fileUploadContainerId : j('#$core_v2_widget.UniqueId('uploadFileContainer')'),
+				uploadFileStateId : '#$core_v2_widget.UniqueId('uploadFileState')',
+				uploadFileUrl : '$core_v2_encoding.JavascriptEncode($core_v2_uploadedFile.GetUploadUrl($contextId))',
+				contextId : '$core_v2_encoding.JavascriptEncode($contextId)',
+        imagename : j('#$core_v2_widget.UniqueId('imagename')'),
+        stsUploadFileCtrl : '#$core_v2_widget.UniqueId('stsUploadFile')'
+			});
+		});
+	</script>
+#end

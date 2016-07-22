@@ -1,0 +1,28 @@
+#set($pageIndex = $core_v2_ui.GetCurrentPageIndex)
+#set($pageSize = 6)
+#set($groupdId = $core_v2_group.Current.Id)
+#set($count = 1)
+
+#set($imagegallerys = $sts_v1_imagegallery.List($groupdId))
+
+    <div class="content-list-header"></div>
+    <div class="content-list">
+	<ul>
+
+#foreach($imagegallery in $imagegallerys)
+#each
+	<li> <a href="#"> $imagegallery.Name </a> </li>
+
+#afterall
+#nodata
+	<div class="message norecords">
+		$core_v2_language.GetResource('no_imagegallerys')
+	</div>
+#end
+
+	</u;>
+	<div style="clear: both;"></div>
+    </div>
+    <div class="content-list-footer"></div>
+
+$core_v2_ui.Pager($imagegallerys.PageIndex, $imagegallerys.PageSize, $imagegallerys.TotalCount, "%{ PagedContentFile='ImageGalleryList.vm' }")

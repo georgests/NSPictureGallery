@@ -1,0 +1,143 @@
+﻿#set($edit_img_url = $core_v2_widget.GetFileUrl('edit_text_icon.png'))
+#set($edit_done_img_url = $core_v2_widget.GetFileUrl('edit_done_bttn.png'))
+#set($delelet_img_url = $core_v2_widget.GetFileUrl('delete_img_bttn.jpg'))
+#set($rotate_img_url = $core_v2_widget.GetFileUrl('rotate-icon.png'))
+
+<style type="text/css">
+  .edit_text_bttn { width:20px; height:20px; background:url('$edit_img_url') no-repeat center center; cursor:pointer; border:none; margin-right:15px}
+  .edit_done_bttn {  width:20px; height:20px; background:url('$edit_done_img_url') no-repeat center center; cursor:pointer; border:none; margin-right:15px}
+  .delete_image_bttn {  width:20px; height:20px; background:url('$delelet_img_url') no-repeat center center; cursor:pointer; border:none; margin-right:15px}
+  .rotate_image_bttn  { width:20px; height:20px; background:url('$rotate_img_url') no-repeat center center; cursor:pointer; border:none;}
+  
+  .sts_image_name_box {
+  height: 20px;
+  margin-left: 5px;
+  padding:5px 10px;
+  width: 90%;
+  border:0px solid #999;
+  color:#333333;
+  border-radius:3px;
+  }
+  .clearfix {
+  clear:both;
+  margin:0;
+  padding:0;
+  }
+
+  .content-list .content-item { border-bottom:none; padding:0px;}
+  .abbreviated-post { padding:10px 15px !important;}
+
+  .image_view_sec { text-align:center; height:125px;}
+  .image_view_sec img { max-width:95% !important; max-height:95% !important;}
+  .buttn_wrap { margin:0 0 5px 0; text-align: center; padding:0px;}
+  .image_head_box { width:90%; margin:1px; padding:2px 5px; border:0px solid #999; height:20px; color:#333333; border-radius:3px; text-align:left}
+  .image_head_box_readonly { width:90%; margin:0px; padding:2px 5px; border:0px solid #999; height:20px; color:#06d; font-weight:bold; font-size: 10px;font-family: Arial; border-radius:3px; text-align:center}
+  .activate { width:90%; margin:0px; padding:2px 5px; border:1px solid #C60; height:20px; color:#fff; background:#0067B1;}
+  .deactivate { width:90%; margin:0px; padding:2px 5px; border:1px solid #999; height:20px; color:black; background:#fff;}
+  .abbreviated-post { padding:10px 15px !important; position: relative !important; min-height: 46px !important;}
+  #userimage_sec { border: 0px solid #0067b1; float: left; height: 202px; margin: 10px 8px; width: 186px; border-radius:3px;}
+
+.sts_photo
+{
+  position: absolute;
+  display: block;
+  max-width: 150px; 
+  max-height: 120px;
+  left: 0;
+  right: 0;
+  top: 10;
+  bottom: 10;
+  margin: auto;
+  border: 0;
+  cursor: pointer;
+
+</style>
+#set($userId = $core_v2_user.Current.Id)
+#set($au = $core_v2_user.Accessing)
+#set($auId = $core_v2_user.Accessing.Id)
+#if ($userId == $core_v2_user.Accessing.Id)
+#set($groupdId = $core_v2_group.Current.Id)
+#set($igId = $sts_v1_imagegallery.FirstImageGalleryId($groupdId, $auId))
+#set($ig = $sts_v1_imagegallery.Get($igId))
+
+#set($images = $ig.Images)
+
+#foreach($image in $images)
+        <!--<div class="content-list-header"></div>-->
+    	#afterall
+	#nodata
+		<div class="message norecords">No File Found</div>
+	#each
+			<li class="content-item userimage_section" id="userimage_sec" img-degree="$image.Degree" data-image-url="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" data-image-id="$image.Id">
+			<div class="abbreviated-post-header"></div>
+			<div class="abbreviated-post">    
+				<div class="post-attachment-viewer">
+				<span></span>              
+<!--                <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id')" border="0" width="150px" height="120px" style="cursor:pointer" /> -->
+             #if ($image.Degree == 0 || $image.Degree == 360)
+               <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)"  alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(0deg);transform: rotate(0deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+			   #elseif($image.Degree == 90)
+			   <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)"  alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(90deg);transform: rotate(90deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+			    #elseif($image.Degree == 180)
+			   <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)"  alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(180deg);transform: rotate(180deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+			   #else
+			    <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(270deg);transform: rotate(270deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+				#end
+				</div>
+    			<div class="post-name" style="margin-top:125px">
+                    <p class="buttn_wrap">
+    				<input type="button" name="btnedit" id = "btnedit$image.Id" class="edit_text_bttn" title="Edit Image Title" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.editimagetitle('$image.Id')" />
+    	        	<input type="button" name="btndelete" id = "btndelete" class="delete_image_bttn" title="Delete Image" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.deleteimage('$image.Id')" />
+					<input type="button" name="btnrotate" id = "btnrotate" class="rotate_image_bttn" title="Rotate Image" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.rotateimage('$image.Id','$image.Degree')" />
+                    </p>
+                    <span><input type="text" id = "tb$image.Id" class="image_head_box_readonly" readOnly="true" value="$core_v2_encoding.HtmlEncode($image.Title)" /></span>
+    			</div>
+			</div>
+			<div class="abbreviated-post-footer"></div>
+		</li>
+#end
+#end
+
+#if ($userId != $core_v2_user.Accessing.Id || !$core_v2_user.IsRegistered($userId))
+#set($au1 = $core_v2_user.Current)
+#set($auId1 = $core_v2_user.Current.Id)
+#set($groupdId1 = $core_v2_group.Current.Id)
+#set($igId1 = $sts_v1_imagegallery.FirstImageGalleryId($groupdId1, $auId1))
+#set($ig1 = $sts_v1_imagegallery.GetImageGalleryByCurrent($igId1,$auId1))
+#set($images1 = $ig1.Images)
+#foreach($image in $images1)
+        <!--<div class="content-list-header"></div>-->
+    #afterall
+       #nodata
+		<div class="message norecords">No File Found</div>
+	#each
+  			<li class="content-item userimage_section" id="userimage_sec" img-degree="$image.Degree" data-image-url="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" data-image-id="$image.Id">
+			<div class="abbreviated-post-header"></div>
+			<div class="abbreviated-post">    
+				<div class="post-attachment-viewer">
+				<span></span>
+<!--                <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id')" border="0" width="150px" height="120px" style="cursor:pointer" /> -->
+               #if ($image.Degree == 0 || $image.Degree == 360)
+              <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)"  alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(0deg);transform: rotate(0deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+              #elseif($image.Degree == 90)
+              <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)"  alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(90deg);transform: rotate(90deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+               #elseif($image.Degree == 180)
+              <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)"  alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(180deg);transform: rotate(180deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+              #else
+               <img src="$core_v2_encoding.HtmlAttributeEncode($image.FilePath)" alt="Photo" title="Click To View Photo of $core_v2_encoding.HtmlEncode($image.Title)" style= " width:120px; height:120px; -webkit-transform: rotate(270deg);transform: rotate(270deg);" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.showpopup(this, '$igId', '$sts_v1_imagegallery.ContentTypeId', '$image.FilePath', '$image.Id', '$image.Degree')" class="sts_photo" />
+              #end
+				</div>
+    			<div class="post-name" style="margin-top:125px">
+                  #*  <p class="buttn_wrap">
+    				<input type="button" name="btnedit" id = "btnedit$image.Id" class="edit_text_bttn" title="Edit Image Title" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.editimagetitle('$image.Id')" />
+    	        	<input type="button" name="btndelete" id = "btndelete" class="delete_image_bttn" title="Delete Image" onclick="javascript:jQuery.sts.imggallery.widgets.imageWidget.deleteimage('$image.Id')" />
+                    </p>*#
+                    <span><input type="text" id = "tb$image.Id" class="image_head_box_readonly" readOnly="true" value="$core_v2_encoding.HtmlEncode($image.Title)" /></span>
+    			</div>
+			</div>
+			<div class="abbreviated-post-footer"></div>
+		</li>
+#end
+#end
+
+<div class="clearfix"> </div>

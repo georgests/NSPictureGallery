@@ -1,0 +1,101 @@
+﻿<scriptedContentFragments>
+  <scriptedContentFragment
+    name="$(resource:imageWidgetFileUpload)"
+    cssClass=""
+    description="$(resource:imageWidgetFileUpload)"
+    instanceIdentifier="6b8f4e6128634ac9bea84d2843b4d5a7"
+    isCacheable="false"
+    varyCacheByUser="false"
+    showHeaderByDefault="true">
+    <contentScript>
+      <![CDATA[
+#if (!$core_v2_configuration.EnableUserFileStorage)
+	$core_v2_widget.Hide()
+#end
+
+#set($userId = $core_v2_user.Current.Id)
+#set($parentFolder = $core_v2_userFolder.Current)
+#set($parentFolderPath = "")
+#set($viewParentFolderUrl = $core_v2_urls.UserFiles($userId, $parentFolder.Path))
+#set($contextId = $core_v2_uploadedFile.CreateContextId())
+
+#if ($userId != $core_v2_user.Accessing.Id || !$core_v2_user.IsRegistered($userId))
+	$core_v2_widget.Hide()
+#end
+
+#if ($parentFolder && $parentFolder.Path && $parentFolder.Path != "")
+	#set($parentFolderPath = $core_v2_utility.Join('\', $parentFolder.Path))
+#end
+
+<div class="field-list-header"></div>
+<fieldset class="field-list">
+	<ul class="field-list">
+		<li class="field-item" id="$core_v2_widget.UniqueId('uploadFileContainer')">
+			<span class="field-item-input">
+				<input type="file" id="$core_v2_widget.UniqueId('uploadFileInput')" />
+				<input type="hidden" name="hiddenInputName" id="$core_v2_widget.UniqueId('uploadFileState')" value="contextValue:" />
+			</span>
+			<span class="field-item-validation" style="display: none;"></span>
+		</li>
+        <li class="field-item">
+        Picture Name:<input type="Text" id="imagename" name="imagename"/>
+        Description:<input type="Text" id="imagedesc" name="imagedesc"/>
+        </li>
+		<li class="field-item">
+			<span class="field-item-input"><input id="$core_v2_widget.UniqueId('savefile')" type="button" disabled value="Add Picture" /></span>
+		</li>
+	</ul>
+</fieldset>
+<div class="field-list-footer"></div>
+
+#registerEndOfPageHtml('telligent.evolution.widgets.addUserFile')
+	<script type="text/javascript" src="$core_v2_encoding.HtmlAttributeEncode($core_v2_widget.GetFileUrl("ui.js"))"></script>
+#end
+#registerEndOfPageHtml()
+	<script type="text/javascript">
+		jQuery(function(){
+            alert(document.getElementById('imagename').value);
+			jQuery.telligent.evolution.widgets.addUserFile.register({
+				wrapperId : '$core_v2_widget.WrapperElementId',
+				userId : '$userId',
+				saveFileButton : jQuery('#$core_v2_widget.UniqueId('savefile')'),
+				fileUploadId : '#$core_v2_widget.UniqueId('uploadFileInput')',
+				fileUploadContainerId : '#$core_v2_widget.UniqueId('uploadFileContainer')',
+				uploadFileStateId : '#$core_v2_widget.UniqueId('uploadFileState')',
+				viewParentFolderUrl : '$core_v2_encoding.JavascriptEncode($core_v2_page.AbsoluteUrl($viewParentFolderUrl))',
+				parentFolderPath : '$core_v2_encoding.JavascriptEncode($parentFolderPath)',
+				createUrl : '$core_v2_encoding.JavascriptEncode($core_v2_widget.GetExecutedFileUrl('create.vm'))',
+				createFileErrorMessage : '$core_v2_encoding.JavascriptEncode($core_v2_language.GetResource("AddUserFile_CreateError"))',
+				uploadFileUrl : '$core_v2_encoding.JavascriptEncode($core_v2_uploadedFile.GetUploadUrl($contextId))',
+				contextId : '$core_v2_encoding.JavascriptEncode($contextId)',
+                imagename : $("#imagename").val(),
+                imagedesc :  $("#imagedesc").val()
+			});
+		});
+	</script>
+#end
+]]>
+    </contentScript>
+    <headerScript>
+      <![CDATA[
+ 
+      ]]>
+    </headerScript>
+    <configuration>
+      <![CDATA[
+ 
+      ]]>
+    </configuration>
+    <additionalCssScript>
+      <![CDATA[
+ 
+      ]]>
+    </additionalCssScript>
+    <languageResources>
+      <language key="en-us">
+        <resource name="imageWidgetFileUpload">NS - Image Gallery File Upload Widget</resource>
+        <resource name="AddUserFile_CreateError">User File Creation Failed</resource>
+      </language>
+    </languageResources>
+  </scriptedContentFragment>
+</scriptedContentFragments>
